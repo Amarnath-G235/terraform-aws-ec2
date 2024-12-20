@@ -4,7 +4,11 @@ variable "ami_id" {
 }
 
 variable "instance_type" {
-    default = "t3.micro"
+    type = string 
+    validation {
+        condition = contains(["t3.micro","t3.small","t3.medium"], var.instance_type)
+        error_message = "instance_type can only between t3.micro,t3.small,t3.medium"
+    }
 }
 
 variable "security_group_ids" {
